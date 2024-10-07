@@ -1,27 +1,64 @@
-# GlobeLinkAssignment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+# Application Setup Guide
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Node.js (>=14.x)
+- Angular CLI (>=12.x)
+- Git
 
-## Code scaffolding
+## Project Setup Instructions
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
+   ```
 
-## Build
+2. Install project dependencies:
+   ```bash
+   npm install
+   ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+3. Start the application:
+   ```bash
+   ng serve
+   ```
 
-## Running unit tests
+   This will launch the application at `http://localhost:4200/`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Steps to Run the Application
 
-## Running end-to-end tests
+1. **Registration**:
+   - Navigate to the registration page (`/sign-up`).
+   - Fill in the required fields (name, email, password) and click on "Sign Up".
+   - Once registered, you will be redirected to the login page.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. **Login**:
+   - Navigate to the login page (`/`).
+   - Use the registered credentials to log in.
+   - On successful login, you will be redirected to the admin panel dashboard.
 
-## Further help
+3. **View Shipments**:
+   - After logging in, you can view the shipment data.
+   - The shipment data can be viewed in three different formats:
+     - **Chart View**: A bar chart displaying the number of orders by date.
+     - **Tabular View**: A table listing all the shipment details.
+     - **Card View**: A card-style layout for each shipment, showing key details.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. **Filter and Search**:
+   - Use the date range filter to view shipments within a specific period.
+   - Search for shipments by product name using the search bar.
+
+## Key Features & Technologies:
+- **Angular Material UI**: Responsive design with Material components.
+- **NgRx**: State management using Redux pattern.
+- **RxJS**: For handling asynchronous data streams.
+- **AuthGuard**: Secured routes with authentication guard.
+- **User Authentication**: Sign-up and sign-in system.
+- **Dummy API**: Simulated data for orders and shipments.
+- **Local Storage**: Persisted user details across sessions.
+- **Filters & Search**: Date range and product name filters.
+- **Form Validation**: Reactive form validation.
+- **Pagination & Sorting**: For large data handling.
+
