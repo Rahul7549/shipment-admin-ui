@@ -1,0 +1,148 @@
+<div class="ship-card-container">
+    <div class="card-view-container row d-flex" *ngIf="activeView=='card-view'">
+      <div class="col-sm-12 col-md-6 col-lg-4 py-3 px-3" *ngFor="let shipment of shipments">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{shipment.productName}}</mat-card-title>
+            <mat-card-subtitle>Order #{{shipment.orderNumber}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <img mat-card-image height="280px" [src]="shipment.imgUrl" alt="Product Image">
+          <mat-card-content class="pb-2">
+            <p><strong>Customer:</strong> {{shipment.customer}}</p>
+            <p><strong>Shipping Address:</strong> {{shipment.shippingAddress}}</p>
+            <p><strong>Phone:</strong> {{shipment.phone}}</p>
+            <mat-chip-listbox aria-label="Fish selection">
+              <mat-chip-option color="primary" selected>In Transit</mat-chip-option>
+              <mat-chip-option color="accent" selected>Updated on: {{shipment.updatedOn}}</mat-chip-option>
+            </mat-chip-listbox>
+            <p><strong>Carrier:</strong> FedEx</p>
+                <p><strong>Tracking Number:</strong>{{shipment.trackingNumber}}</p>
+                <p><strong>Shipping Method:</strong> {{shipment.shippingMethod}}</p>
+                <p><strong>Estimated Delivery:</strong> {{shipment.estimatedDelivery}}</p>
+                <p><strong>Items:</strong>{{shipment.items}}</p>
+                <p><strong>Weight:</strong> {{shipment.weight}} KG</p>
+                <p><strong>Shipping Cost:</strong> ${{shipment.shippingCost}}</p>
+                  <mat-list-item class="pb-2" *ngFor="let item of shipment.history"><strong>{{item.date}}:</strong> {{item.event}}</mat-list-item>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <mat-card-actions class="action-buttons">
+              <button mat-raised-button color="primary" (click)="editShipment(shipment)">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit"></mat-icon>
+                Update</button>
+              <button mat-raised-button color="accent">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="print"></mat-icon>
+                Print</button>
+              <button mat-raised-button color="warn" (click)="deleteShipment(shipment.id)">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
+                Delete</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="chart-container" *ngIf="activeView=='table-view'">
+      <div *ngFor="let data of chartData" class="bar-wrapper pb-4">
+          <span><b>{{ data.count }} orders</b></span>
+          <div
+              class="bar" [ngStyle]="{'background-color': data.color}" 
+              [style.height]="data.count * 10 + 'px'" 
+              matTooltip="{{ data.count }} orders">
+          </div>
+          <span class="label"><b>{{ data.orderedOn }}</b></span>
+      </div>
+  </div>
+
+    <div class="table-container" *ngIf="activeView=='chart-view'">
+      <div class="example-container mat-elevation-z8">
+        <div class="example-loading-shade"
+             *ngIf="isLoadingResults || isRateLimitReached">
+          <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+          <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+            GitHub's API rate limit has been reached. It will be reset in one minute.
+          </div>
+        </div>
+      
+        <div class="example-table-container">
+      
+         
+
+          <table mat-table [dataSource]="paginatedData" class="example-table" matSort matSortActive="updatedOn" matSortDisableClear matSortDirection="desc">
+
+            <!-- Product Name Column -->
+            <ng-container matColumnDef="productName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</th>
+              <td mat-cell *matCellDef="let shipment" class="product-name-cell"><strong>{{ shipment.productName }}</strong></td>
+            </ng-container>
+          
+            <!-- Customer Name Column -->
+            <ng-container matColumnDef="customer">
+              <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+              <td mat-cell *matCellDef="let shipment">{{ shipment.customer }}</td>
+            </ng-container>
+          
+            <!-- Order No Column -->
+            <ng-container matColumnDef="orderNumber">
+              <th mat-header-cell *matHeaderCellDef>Order No</th>
+              <td mat-cell *matCellDef="let shipment" class="order-number">{{ shipment.orderNumber }}</td>
+            </ng-container>
+          
+            <!-- Last Update Column -->
+            <ng-container matColumnDef="updatedOn">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Update</th>
+              <td mat-cell *matCellDef="let shipment" >{{ shipment.updatedOn | date: 'short' }}</td>
+            </ng-container>
+          
+            <!-- Tracking Number Column -->
+            <ng-container matColumnDef="trackingNumber">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Tracking Number</th>
+              <td mat-cell *matCellDef="let shipment" class="tracking-number">{{ shipment.trackingNumber }}</td>
+            </ng-container>
+          
+            <!-- Current Status Column -->
+            <ng-container matColumnDef="currentStatus">
+              <th mat-header-cell *matHeaderCellDef>Current Status</th>
+              <td mat-cell *matCellDef="let shipment"><mat-chip-option color="accent" selected>{{ shipment.history[shipment.history.length-1].event }}</mat-chip-option></td>
+            </ng-container>
+          
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let shipment">
+                <!-- Edit Icon -->
+                <button mat-icon-button aria-label="Edit" (click)="editShipment(shipment)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                
+                <!-- Delete Icon -->
+                <button mat-icon-button aria-label="Delete" (click)="deleteShipment(shipment.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+          
+                <!-- Print Icon -->
+                <button mat-icon-button aria-label="Print" (click)="printShipment(shipment)">
+                  <mat-icon>print</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></tr>
+          </table>
+          
+          
+        </div>
+        <mat-paginator
+          [length]="resultsLength"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="onPageChange($event)"
+          aria-label="Select page of shipment results">
+        </mat-paginator>
+        <!-- <mat-paginator [length]="resultsLength" [pageSize]="10" aria-label="Select page of GitHub search results"></mat-paginator> -->
+      </div>
+      
+    </div>
+      
+
+</div> 

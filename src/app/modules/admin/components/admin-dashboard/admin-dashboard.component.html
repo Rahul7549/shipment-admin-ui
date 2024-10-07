@@ -1,0 +1,69 @@
+<div class="admin-dashboard">
+  <div class="screen-mask" [class.active]="isDialogOpen"></div>
+  <app-admin-header></app-admin-header>
+  <div class="ship-card-container mt-4">
+    <mat-card>
+      <mat-card-header color="warm" class="header">
+        <div class="header-left-container d-flex">
+          <h4>Shipping({{activeView.length}})</h4>
+          <form [formGroup]="shipmentFilterForm">
+            <mat-form-field appearance="fill" class="pr-1 pl-3">
+              <mat-label>Start Date</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="startDate" placeholder="Choose a date" />
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          
+            <mat-form-field appearance="fill" class="pr-1 pl-3">
+              <mat-label>End Date</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="endDate" placeholder="Choose a date" />
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          
+            <mat-form-field appearance="fill" class="pr-3 pl-3">
+              <mat-label>Search Term</mat-label>
+              <input matInput formControlName="searchTerm" placeholder="Search product name..." />
+            </mat-form-field>
+          </form>
+          <div class="filter-btn-cesction">
+            <button mat-raised-button class="d-flex" color="warn" (click)="applyFilter()">Apply Filter</button>
+            <button mat-raised-button class="d-flex" color="warn" (click)="clearFilter()">Clear Filter</button>
+          </div>
+        </div>
+
+        <div class="header-right-container">
+          <button mat-raised-button color="primary" (click)="openAddShipmentDialog()">Add New Record</button>
+        </div>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content class="content-container">
+        <div *ngIf="filteredShipments.length > 0; else noData">
+          <app-shipping-data-view 
+          [activeView]="activeView"
+          [shipments]="filteredShipments"></app-shipping-data-view>
+        </div>
+        
+        <ng-template #noData>
+          <mat-card class="mt-2">
+            <mat-card-content>
+              <p class="text-center">No Data Found</p>
+            </mat-card-content>
+          </mat-card>
+        </ng-template>
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-footer class="footer-button-section">
+        <div class="grid-layout-tbn active">
+          <button mat-raised-button color="accent" (click)="selectView('card-view')">Select Card Layout</button>
+        </div>
+        <div class="card-layout-tbn">
+          <button mat-raised-button color="accent" (click)="selectView('table-view')">Select Chart Layout</button>
+        </div>
+        <div class="chart-layout-tbn">
+          <button mat-raised-button color="accent" (click)="selectView('chart-view')">Select Grid Layout</button>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

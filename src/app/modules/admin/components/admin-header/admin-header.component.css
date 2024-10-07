@@ -1,0 +1,30 @@
+  .header-toolbar {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    z-index: 1000; 
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+  }
+  
+  .toolbar-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .spacer {
+    flex: 1 1 auto; 
+  }
+  
+  .header-button {
+    margin-left: 16px;
+  }
+  .fat-right-arrow {
+    font-size: 36px;  /* Increase the size */
+    font-weight: bold; /* Make it appear thicker */
+  }
+  

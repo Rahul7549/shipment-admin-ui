@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" class="header-toolbar">
+    <span class="toolbar-title">My Application</span>
+    
+    <span class="spacer"></span>
+  
+    <a mat-button routerLink="/home">Home</a>
+    <a mat-button routerLink="/about">About</a>
+    <a mat-button routerLink="/contact">Contact</a>
+  
+    <!-- <button mat-icon-button class="header-button" aria-label="User Profile"> -->
+      <button mat-button (click)="logOut()">
+        <mat-icon>arrow_forward</mat-icon> Logout
+      </button>
+      <!-- <mat-icon>account_circle</mat-icon> -->
+    <!-- </button> -->
+  </mat-toolbar>
+  

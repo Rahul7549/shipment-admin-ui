@@ -1,0 +1,24 @@
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.left-action-btn {
+  margin-right: auto; 
+}
+
+.right-action-btn {
+  margin-left: auto; 
+}
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}

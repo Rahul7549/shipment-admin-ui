@@ -1,0 +1,117 @@
+.ship-card-container {
+  padding: 25px;
+  min-height: 70vh;
+  max-height: 70vh;
+}
+
+.header-left-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+  min-height: 70vh;
+  overflow-y: scroll;
+}
+
+.footer-button-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+}
+
+mat-card {
+  margin: 16px;
+}
+
+.container {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2196f3;
+  color: white;
+}
+
+.header-left-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.header-right-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.content-container {
+  padding: 16px;
+  min-height: 70vh;
+}
+
+.footer-button-section {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .header-left-container,
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header-left-container mat-form-field {
+    margin-bottom: 8px;
+  }
+
+  .header-right-container {
+    padding-top: 8px;
+  }
+}
+
+.footer-button-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.footer-button-section > div {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.footer-button-section button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.footer-button-section button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.footer-button-section button.active {
+  border-top: 3px solid #1976d2;
+}
+
+.footer-button-section button:hover {
+  color: black;
+}
+
+.filter-btn-cesction{
+  position: relative;
+  width: 45%;
+  display: inline-flex;
+  gap: 10px;
+}
