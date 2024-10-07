@@ -2,7 +2,7 @@
 # Setup and Run the Application
 
 ## Step 1: Install Dependencies
-1. Make sure you have Node.js and npm installed on your machine.
+1. Make sure you have Angular 16 and npm installed on your machine.
 2. Clone the repository from GitHub.
    ```bash
    git clone <repository-url>
