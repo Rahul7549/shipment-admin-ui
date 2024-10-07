@@ -31,45 +31,7 @@ export class ShippingDataViewComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   chartData: { orderedOn: string; count: number; color: string }[] = [];
 
-  public orders = [
-    { date: 'Oct 1', count: 12 ,color:this.generateRandomColor()},
-    { date: 'Oct 2', count: 19,color:this.generateRandomColor() },
-    { date: 'Oct 3', count: 3 ,color:this.generateRandomColor()},
-    { date: 'Oct 4', count: 5 ,color:this.generateRandomColor()},
-    { date: 'Oct 5', count: 2 ,color:this.generateRandomColor()},
-    { date: 'Oct 1', count: 12,color:this.generateRandomColor() },
-    { date: 'Oct 2', count: 19 ,color:this.generateRandomColor()},
-    { date: 'Oct 3', count: 3 ,color:this.generateRandomColor()},
-    { date: 'Oct 4', count: 5 ,color:this.generateRandomColor()},
-    { date: 'Oct 5', count: 2 ,color:this.generateRandomColor()},
-    { date: 'Oct 1', count: 12 ,color:this.generateRandomColor()},
-    { date: 'Oct 2', count: 19,color:this.generateRandomColor() },
-    { date: 'Oct 3', count: 3 ,color:this.generateRandomColor()},
-    { date: 'Oct 4', count: 5 ,color:this.generateRandomColor()},
-    { date: 'Oct 5', count: 2 ,color:this.generateRandomColor()},
-  ];
-
-  fruitCounts = [
-    { name: 'Apples', likedCount: 30, likedPercentage: 60, barColor: '#4caf50' },
-    { name: 'Bananas', likedCount: 20, likedPercentage: 40, barColor: '#ffeb3b' },
-    { name: 'Cherries', likedCount: 50, likedPercentage: 100, barColor: '#f44336' },
-    { name: 'Grapes', likedCount: 15, likedPercentage: 30, barColor: '#9c27b0' },
-    { name: 'Oranges', likedCount: 25, likedPercentage: 50, barColor: '#ff9800' },
-    { name: 'Apples', likedCount: 30, likedPercentage: 60, barColor: '#4caf50' },
-    { name: 'Bananas', likedCount: 20, likedPercentage: 40, barColor: '#ffeb3b' },
-    { name: 'Cherries', likedCount: 50, likedPercentage: 100, barColor: '#f44336' },
-    { name: 'Grapes', likedCount: 15, likedPercentage: 30, barColor: '#9c27b0' },
-    { name: 'Oranges', likedCount: 25, likedPercentage: 50, barColor: '#ff9800' },
-    { name: 'Apples', likedCount: 30, likedPercentage: 60, barColor: '#4caf50' },
-    { name: 'Bananas', likedCount: 20, likedPercentage: 40, barColor: '#ffeb3b' },
-    { name: 'Cherries', likedCount: 50, likedPercentage: 100, barColor: '#f44336' },
-    { name: 'Grapes', likedCount: 15, likedPercentage: 30, barColor: '#9c27b0' },
-    { name: 'Oranges', likedCount: 25, likedPercentage: 50, barColor: '#ff9800' }
-  ];
-
   constructor(private store:Store,private dialog: MatDialog){
-    this.createYAxisScale();
-    this.data=this.fruitCounts;
     this.isLoadingResults=false;
     this.resultsLength = this.data.length;
     //this.fetchShipments();
@@ -88,16 +50,8 @@ export class ShippingDataViewComponent implements OnInit {
   }
 
   
-  createYAxisScale() {
-    const maxCount = Math.max(...this.orders.map(order => order.count)); // Find the maximum count
-    const scaleStep = Math.ceil(maxCount / 5); // Divide the max count into 5 parts
-    this.yAxisScale = Array.from({ length: Math.ceil(maxCount / scaleStep) + 1 }, (_, i) => i * scaleStep); // Start from 0
-    console.log(this.yAxisScale)
-  }
-  fetchLikedByPeople(fruitName: string, barColor: string) {
-    console.log(`Fetching details for ${fruitName} with color ${barColor}`);
-    // Implement logic to fetch the liked details for this fruit
-  }
+
+
 
   generateRandomColor(): string {
     const letters = '0123456789ABCDEF';
@@ -113,7 +67,8 @@ export class ShippingDataViewComponent implements OnInit {
     this.store.dispatch(ShipmentActions.deleteShipment({ id }));
   }
   printShipment(shipment:Shipment){
-
+    //Function has to implement latter on
+    console.log("print btn clicked")
   }
 
 

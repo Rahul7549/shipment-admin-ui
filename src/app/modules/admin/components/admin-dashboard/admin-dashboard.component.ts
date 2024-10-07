@@ -3,7 +3,6 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageShippingComponent } from '../manage-shipping/manage-shipping.component';
 import { Shipment } from '../../model/shipment';
-import { Observable } from 'rxjs';
 import { selectAllShipments } from '../../state/shipment.selectors';
 import { Store } from '@ngrx/store';
 import * as ShipmentActions from '../../state/shipment.actions';
@@ -39,15 +38,6 @@ export class AdminDashboardComponent implements OnInit {
       this.filteredShipments=value;
     });
     this.store.dispatch(ShipmentActions.loadShipments());
-  }
-
-
-  createShipment(shipment: Shipment) {
-    this.store.dispatch(ShipmentActions.createShipment({ shipment }));
-  }
-
-  updateShipment(shipment: Shipment) {
-    this.store.dispatch(ShipmentActions.updateShipment({ shipment }));
   }
 
   onDeleteShipment(id: number): void {

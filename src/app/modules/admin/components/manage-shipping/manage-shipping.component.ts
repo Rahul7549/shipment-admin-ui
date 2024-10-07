@@ -43,7 +43,6 @@ export class ManageShippingComponent implements OnInit{
     
   }
   ngOnInit(): void {
-    console.log("data",this.data);
     if(this.isEdit){
       this.shipmentToEdit=this.data;
       this.setFormValues(this.data);
@@ -57,7 +56,6 @@ export class ManageShippingComponent implements OnInit{
         id: this.isEdit ? this.shipmentToEdit.id : this.generateRandomId(), // Assign ID accordingly
         ...this.shipmentForm.value,
         orderedOn: new Date(this.shipmentForm.get('orderedOn')?.value).toISOString(), // Set orderedOn to current date
-        //imgUrl: '', // Set default or keep empty if not used
         updatedOn: new Date().toISOString(), // Set updatedOn to current date
         history: [{date:new Date().toISOString(),event:this.shipmentForm.get('currentEvent')?.value}] // Initialize history as empty
       };
@@ -71,7 +69,6 @@ export class ManageShippingComponent implements OnInit{
   }
 
   addShipment(shipment: Shipment) {
-    // Logic to add the new shipment (e.g., call a service to save it)
     console.log('Adding shipment:', shipment);
     this.store.dispatch(ShipmentActions.createShipment({ shipment }));
     this.onCancel();
